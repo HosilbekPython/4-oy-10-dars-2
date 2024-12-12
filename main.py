@@ -1,407 +1,341 @@
 
-from collections import namedtuple
+# 1 misol
+
+# ---------------------------------------------------------------------
+
+# class IteratorYaratish:
+#     def __init__(self):
+#         self.start = 1
+#         self.stop = 10
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.start <= self.stop:
+#             raqam = self.start
+#             self.start += 1
+#             return raqam
+#         else:
+#             raise StopIteration ("Element qolmadi !!")
+#
+#
+# iterator = IteratorYaratish()
+# natija = iterator.__iter__()
+# print(natija.__next__())
+# print(natija.__next__())
+#
+# for i in natija:
+#     print(i)
 
 
-# ----------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
+
+# 2 misol
+
+# list_royhat = ['bir' , 'ikki' , 'uch' , 'tort' , 'besh']
+# iter_yaratish = list_royhat.__iter__()
+# print(iter_yaratish.__next__())
+# print(iter_yaratish.__next__())
+# print(iter_yaratish.__next__())
+# print(iter_yaratish.__next__())
+
+# ---------------------------------------------------------------------
+
+# 3 misol
+
+# list_royhat = ['bir' , 'ikki' , 'uch' , 'tort' , 'besh']
+#
+#
+# class TeskariIterableChiqarish:
+#     def __init__(self , royhat):
+#         self.__royhat = royhat
+#         self.__start = len(self.__royhat)
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.__start >= 1:
+#             self.__start += -1
+#             return self.__royhat[self.__start]
+#         else:
+#             raise StopIteration("Element qolmadi !!!")
+#
+#
+# royhat1 = TeskariIterableChiqarish(list_royhat)
+# print(next(royhat1))
+# print(next(royhat1))
+# print(next(royhat1))
+# print(next(royhat1))
+# print(next(royhat1))
+
+
+# ---------------------------------------------------------------------
+
+# 4 misol
+
+# text = " Assalom alekum , Hello World , Salom , hello"
+#
+# class QatorniIteratsiyaQilish:
+#     def __init__(self , text:str):
+#         self.__text = text
+#         self.__elemnt = -1
+#         self.__hariflar = [letter for word in text.split(" ") for letter in word]
+#
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         self.__elemnt += 1
+#         if self.__elemnt >= len(self.__hariflar):
+#             raise StopIteration("Element qolmadi !!!")
+#         return self.__hariflar[self.__elemnt]
+#
+# qator1 = QatorniIteratsiyaQilish(text)
+# qator_iter = qator1.__iter__()
+# print(qator_iter.__next__())
+# print(qator_iter.__next__())
+# print(qator_iter.__next__())
+
+# ---------------------------------------------------------------------
+
+# 5 misol
+
+# class FilterItarable:
+#     def __init__(self , max_son):
+#         self.__max_son = max_son
+#         self.__min_son = -1
+#         self.__juft_sonlar = [num for num in range(1 ,self.__max_son +1) if num % 2 == 0]
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         self.__min_son += 1
+#         if self.__min_son < len(self.__juft_sonlar):
+#             return self.__juft_sonlar[self.__min_son]
+#
+#         else:
+#             raise StopIteration("Element qolmadi !!!")
+#
+# son1 = FilterItarable(9)
+# son_items = son1.__iter__()
+# print(son_items.__next__())
+# print(son_items.__next__())
+# print(son_items.__next__())
+# print(son_items.__next__())
+
+# ---------------------------------------------------------------------
+
+# 6 misol
+
+# royhat = [1,2,3,4,5,6]
+#
+# iterator_royhat = iter(royhat)
+#
+# countor = 0
+#
+# while True:
+#     try:
+#         countor += next(iterator_royhat)
+#     except StopIteration:
+#         break
+#
+# print(countor)
+
+
+
+# ---------------------------------------------------------------------
+
+# 7 misol
+
+
+# royhat = ["1","2","3","4","5","6"]
+# iterator_royhat = iter(royhat)
+#
+# qidirlyotgan_elemnt = "22"
+# natija = "Yoq"
+#
+# for i in royhat:
+#     if next(iterator_royhat) == qidirlyotgan_elemnt:
+#         natija = "Bor"
+# print(natija)
+
+
+
+# ---------------------------------------------------------------------
+
+# Generatorlarga oid
+
+# ---------------------------------------------------------------------
 
 # 1 misol
 
 
-# talaba_list = [
-#     {'name' : "Hosilek" , 'age' : 21 , "majon" : "Python"},
-#     {'name' : "Rystamov Asilbek" , 'age' : 18 , "majon" : "JAVA"},
-#     {'name' : "Qodirjon" , 'age' : 17 , "majon" : "Frontend"}
-# ]
+# def renge_gen(max_son):
+#     countor = 0
+#     while max_son > countor:
+#         yield countor
+#         countor += 1
 #
-# Talaba = namedtuple("Talaba" , ['name' , 'age' , "majon"])
-#
-# for user in talaba_list:
-#     talabalar = Talaba(**user)
-#     print(f"Ismi : {talabalar.name} Yoshi : {talabalar.age} Yo'nalishi : {talabalar.majon}")
+# son = renge_gen(20)
+# print(list(son))
 
 
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 2 misol
 
-
-# product = [
-#     {"product_name" : "Sabzi" , "price" : "1500 som" , "quantity" : "5 kilo"},
-#     {"product_name" : "Kartoshka" , "price" : "3000 som" , "quantity" : "6 kilo"}
-# ]
+# def matin_uzunligini_topish(matin:str):
+#     royhat = matin.split(" ")
+#     harflar = 0
+#     for i in royhat:
+#         harflar = 0
+#         for j in i:
+#             harflar +=1
+#         yield f"{harflar}"
 #
-# Maxsulot = namedtuple("Maxsulot" , ["product_name" , "price" , "quantity"])
-#
-# for maxsulot in product:
-#     maxsulotning = Maxsulot(**maxsulot)
-#     print(f"Maxsulot nomi : {maxsulotning.product_name} Narxi : {maxsulotning.price} dan {maxsulotning.quantity}")
-#
+# text = matin_uzunligini_topish("Assalom alekum")
+# print(list(text))
 
-
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 3 misol
 
-# shaxar_royhati = [
-#     {"city_name": "Andijon" , "country" : "O'zbekiston" , "population" : "50000"},
-#     {"city_name": "Fargona" , "country" : "O'zbekiston" , "population" : "80000"},
-#     {"city_name": "Namangan" , "country" : "O'zbekiston" , "population" : "45000"},
-# ]
-#
-# Shaxar = namedtuple("Shaxarlar" , ["city_name" , "country" , "population"])
-# shaxarlar_axolisi = []
-#
-# for shaxarcha in shaxar_royhati:
-#     shaxarcha["population"] = int(shaxarcha["population"])
-#     shaxarning = Shaxar(**shaxarcha)
-#     print(f"Shaxarning davlati : {shaxarning.country} , Shaxar nomi : {shaxarning.city_name} , Axoli soni {shaxarning.population}")
-#     shaxarlar_axolisi.append(shaxarning.population)
-#
-#
-# for i in shaxar_royhati:
-#     shaxarning2 = Shaxar(**i)
-#     if shaxarning2.population == max(shaxarlar_axolisi):
-#         print(f"Bular ichida eng axolisi kopi {shaxarning2.city_name} {shaxarning2.population} ")
-#
-# print(f"Bular ichida eng axolisi kopi {max(shaxarlar_axolisi)}")
+# def toq_son_gen(max_son):
+#     for i in range(max_son):
+#         if i %2==1:
+#             yield i
+# son = toq_son_gen(45)
+# print(list(son))
 
-
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 4 misol
 
+# max_son = 20
+# juft_son = (num for num in range(max_son) if num % 2 ==0)
+# print(list(juft_son))
 
-
-# avtomabil_listt = [
-#     {"make" : "UzAvto" , "model" : "Nexia3" , 'year' : 2019},
-#     {"make" : "UzAvto" , "model" : "Nexia2" , 'year' : 2014},
-#     {"make" : "UzAvto" , "model" : "Cobalt" , 'year' : 2015},
-# ]
-#
-#
-# Avtomabil = namedtuple("Avto" , ["make" , "model" , 'year'])
-#
-# avtomabil_yilari = []
-#
-# for avtomabil in avtomabil_listt:
-#     avtomabilning = Avtomabil(**avtomabil)
-#     print(f"Avtomabil ishlab chiqargan kampaniya {avtomabilning.make} Avtomabil nomi : {avtomabilning.model} Yili : {avtomabilning.year} ")
-#     avtomabil_yilari.append(avtomabilning.year)
-#
-# for avtomabil2 in avtomabil_listt:
-#     avtomabilning = Avtomabil(**avtomabil2)
-#     if avtomabilning.year == max(avtomabil_yilari):
-#         print(f"Eng yangi avtomabil : {avtomabilning.model} yilii : {avtomabilning.year}")
-
-
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 5 misol
 
-# def uzavto(avto_companiy):
-#     def inner(avto_name):
-#         nonlocal avto_companiy
-#         return f"Avtomabil ishlab chiqargan Kampaniya {avto_companiy} avtomabil nomi {avto_name}"
-#     return inner
+
+# def chaksiz_gen():
+#     son = 0
+#     while True:
+#         son +=1
+#         yield son
 #
-# avto1 = uzavto("Uz Avo Motor")
-# print(avto1("Nexia 3"))
+# son = chaksiz_gen()
+#
+# for i in range(20):
+#     print(next(son))
 
 
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 6 misol
 
-# def add_text(ism):
-#     def inner():
-#         nonlocal ism
-#         return f"Assalom alekum {ism}"
-#     return inner
-# name1 = add_text("Hosilbek")
-# print(name1())
+# num = {i : i ** 2 for i in range(1,10)}
+# print(num)
 
 
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 7 misol
 
-# def kiritlgan_sonda_amal1(kirtilganda:str):
-#     if kirtilganda.isdigit():
-#         kirtilganda = int(kirtilganda)
-#         def inner():
-#             return kirtilganda + 5
-#         return inner
-#     else:
-#         return "Siz raqam kirtmadiznigiz"
+
+# def yigindi(max):
+#     yigindi = 0
+#     for i in range(max+1):
+#         yigindi += i
 #
-# kirtilgan_son = '45'
-# son1 = kiritlgan_sonda_amal1(kirtilgan_son)
-# print(son1())
+#     yield yigindi
+#
+# son1 = yigindi(4)
+# print(next(son1))
 
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 8 misol
 
-# def birga_oshirish():
-#     son = 0
-#     def inner():
-#         nonlocal son
-#         son+=1
-#         return son
-#     return inner
-# amal1 = birga_oshirish()
-# print(amal1())
-# print(amal1())
-# print(amal1())
-# print(amal1())
-# print(amal1())
-# print(amal1())
+
+# listda = [1,5,-9,8,7,-4,-12,4,9,-5]
+#
+# def musbat_filter(royhat):
+#     for i in royhat:
+#         if i > 0 :
+#             yield i
+#
+# son1 = musbat_filter(listda)
+# print(list(son1))
 
 
-
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 9 misol
 
-
-# def kivadirat_qaytaruvchi():
-#     def inner(raqam:int):
-#         return raqam**2
-#     return inner
+# import random
 #
-# kvadirat1 = kivadirat_qaytaruvchi()
-# print(kvadirat1(45))
+# def tasadifiy_gen():
+#     for i in range(4):
+#         yield random.randint(1 , 100)
+#
+# son1 = tasadifiy_gen()
+# print(list(son1))
 
 
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 10 misol
 
+# def tub_son(max_son):
+#     bolinuvchilar_soni = 0
+#     for i in range(1 , max_son+1):
+#         bolinuvchilar_soni = 0
+#         for j in range(1 , i+1):
+#             if i % j == 0:
+#                 bolinuvchilar_soni +=1
+#         if bolinuvchilar_soni == 2:
+#             yield i
+# son1 = tub_son(20)
+# print(list(son1))
 
-# name_list = ["temur" , 'sobir' , 'bakir']
-#
-# def listga_qoshish(new_name):
-#     def inner():
-#         global name_list
-#         name_list.append(new_name)
-#         return f"{new_name} royhatga qo'shildi \n Ro'yhat {name_list}"
-#     return inner
-#
-# qoshish = listga_qoshish("Hosilbek")
-# print(qoshish())
 
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 11 misol
 
 
-# def maxsulot_name_skidka(name:str , royhat : dict):
-#     def maxsulot_skidka_son(foiz:str):
-#         if foiz.isdigit():
-#             foiz = int(foiz)
-#             for key , valu in royhat.items():
-#                 valu = int(valu)
-#                 if key == name:
-#                     return valu * foiz /100 + valu
-#     return maxsulot_skidka_son
+# def teskari_matin(matin:str):
+#     yield matin[::-1]
 #
-#
-# maxsulotlar = {"Iphon11" : '300' , "Iphon12" : '350' , "Iphon13" : '400'}
-# maxsulot_nomlari = []
-#
-# for key , valu in maxsulotlar.items():
-#     print(f"{key} narxi {valu}")
-#     maxsulot_nomlari.append(key)
-#
-# print('Shu maxsulotlardan qaysi biriga skidka qilinsin ')
-#
-# skidka_nomi_kiritildi = 'Iphon11'
-#
-#
-#
-# if skidka_nomi_kiritildi in maxsulot_nomlari:
-#     foiz_kiritildi = '10'
-#     maxulot = maxsulot_name_skidka(skidka_nomi_kiritildi , maxsulotlar)
-#     print(maxulot(foiz_kiritildi))
-#
-# else:
-#     print("Bunday maxsulotimiz yoq ")
+# matin1 = teskari_matin("Assalom")
+# print(next(matin1))
 
 
 
 
-
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------
 
 # 12 misol
 
-# def maxsulotlar(maxsulot):
-#     text = ""
-#     def inner():
-#         nonlocal text
-#         text += maxsulot + " " * 2
-#         return text
+
+
+# def kopaytma(max):
+#     kopaytma = 1
+#     for i in range(1 , max+1):
+#         kopaytma *= i
 #
-#     return inner
-# maxsulot1 = maxsulotlar("non")
-# print(maxsulot1())
-# print(maxsulot1())
-# print(maxsulot1())
-
-
-
-# ----------------------------------------------------------------------------
-
-# 13 misol
-
-# def qator(birinchi_qator):
-#     a = birinchi_qator
-#     def keyingi_qatorlar(new):
-#         nonlocal a
-#         a += new
-#         return a
-#     return keyingi_qatorlar
+#     yield kopaytma
 #
-# text = qator("assalom alkeum")
-# print(text(" Hello"))
-# print(text("Privet"))
-# print(text("Privet"))
-
-
-# ----------------------------------------------------------------------------
-
-# 14 misol
-
-# def sonlar(max_son):
-#     def inner():
-#         nonlocal max_son
-#         for i in range(max_son):
-#             if i%2==1:
-#                 print(i)
-#     return inner()
-#
-# s = sonlar(10)
-
-
-# ----------------------------------------------------------------------------
-
-# 15 misol
-
-# def darajaga_kotarish(son):
-#     def innier(daraja):
-#         return son ** daraja
-#     return innier
-#
-# son1 = darajaga_kotarish(41)
-# print(son1(2))
-
-
-
-
-# ----------------------------------------------------------------------------
-
-# 16 misol
-
-# def string_teskari_ogirish():
-#     def inner(matin):
-#         return matin[::-1]
-#     return inner
-#
-# text = string_teskari_ogirish()
-# print(text('Assalom'))
-
-
-# ----------------------------------------------------------------------------
-
-# 17 misol
-
-
-# def savatga_qoshish_fun(dokon_maxsulotlari_dict: dict ):
-#     def inner(savatda:list):
-#         counter_suma = 0
-#         for key, valu in dokon_maxsulotlari_dict.items():
-#             if key in savatda:
-#                 counter_suma += int(valu)
-#         maxsulotlar = ", ".join(savatda)
-#         print(f"\nSavatda {maxsulotlar}")
-#         return f"Umumiy narx : {counter_suma}"
-#     return inner
-#
-#
-#
-# dokonda = {"olma": "4000" , "anor" : "5000" , 'bexi' : '10000'}
-#
-# print("Do'kondagi maxsulotlar \n")
-#
-# for key , valu in dokonda.items():
-#     print(f"{key} narxi {valu} som")
-#
-#
-# savatdagi_maxsulotlar = "olma,anor".split(",")
-#
-# dokon1 = savatga_qoshish_fun(dokonda)
-# print(dokon1(savatdagi_maxsulotlar))
-
-
-
-# ----------------------------------------------------------------------------
-
-# 18 misol
-
-# def maxsulot_narxini_ozgartirish(maxsulot_royhati:dict):
-#     def inner(maxsulot_nomi:str , maxsulot_yangi_narxi:str):
-#         for key, valu in maxsulot_royhati.items():
-#             if maxsulot_nomi in key :
-#                 maxsulot_royhati[key] = maxsulot_yangi_narxi
-#                 return f"{key} yangi {maxsulot_yangi_narxi} narxiga o'zgardi"
-#             else:
-#                 return "Bunday maxsulot yoq"
-#     return inner
-#
-#
-# dokonda = {"olma": "4000" , "anor" : "5000" , 'bexi' : '10000'}
-# # dokonda_maxsulotlar_nomi = []
-#
-# print("Do'kondagi maxsulotlar \n")
-#
-# for key , valu in dokonda.items():
-#     # dokonda_maxsulotlar_nomi.append(key)
-#     print(f"{key} narxi {valu} som")
-#
-#
-# # savatdagi_maxsulotlar = "olma,anor".split(",")
-#
-#
-# ozgarish1 = maxsulot_narxini_ozgartirish(dokonda)
-# print(ozgarish1("olma" , "555"))
-# print(dokonda)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# son1 = kopaytma(4)
+# print(next(son1))
 
 
 
