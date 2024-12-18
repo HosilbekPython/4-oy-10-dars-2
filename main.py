@@ -1,346 +1,239 @@
 
-# 1 misol
+# Fn28 guruh To'htarov Hosilbek
+# 4 oy 8 dars
 
-# ---------------------------------------------------------------------
-
-# class IteratorYaratish:
-#     def __init__(self):
-#         self.start = 1
-#         self.stop = 10
-#
-#     def __iter__(self):
-#         return self
-#
-#     def __next__(self):
-#         if self.start <= self.stop:
-#             raqam = self.start
-#             self.start += 1
-#             return raqam
-#         else:
-#             raise StopIteration ("Element qolmadi !!")
-#
-#
-# iterator = IteratorYaratish()
-# natija = iterator.__iter__()
-# print(natija.__next__())
-# print(natija.__next__())
-#
-# for i in natija:
-#     print(i)
-
-
-
-# ---------------------------------------------------------------------
-
-# 2 misol
-
-# list_royhat = ['bir' , 'ikki' , 'uch' , 'tort' , 'besh']
-# iter_yaratish = list_royhat.__iter__()
-# print(iter_yaratish.__next__())
-# print(iter_yaratish.__next__())
-# print(iter_yaratish.__next__())
-# print(iter_yaratish.__next__())
-
-# ---------------------------------------------------------------------
-
-# 3 misol
-
-# list_royhat = ['bir' , 'ikki' , 'uch' , 'tort' , 'besh']
-#
-#
-# class TeskariIterableChiqarish:
-#     def __init__(self , royhat):
-#         self.__royhat = royhat
-#         self.__start = len(self.__royhat)
-#
-#     def __iter__(self):
-#         return self
-#
-#     def __next__(self):
-#         if self.__start >= 1:
-#             self.__start += -1
-#             return self.__royhat[self.__start]
-#         else:
-#             raise StopIteration("Element qolmadi !!!")
-#
-#
-# royhat1 = TeskariIterableChiqarish(list_royhat)
-# print(next(royhat1))
-# print(next(royhat1))
-# print(next(royhat1))
-# print(next(royhat1))
-# print(next(royhat1))
-
-
-# ---------------------------------------------------------------------
-
-# 4 misol
-
-# text = " Assalom alekum , Hello World , Salom , hello"
-#
-# class QatorniIteratsiyaQilish:
-#     def __init__(self , text:str):
-#         self.__text = text
-#         self.__elemnt = -1
-#         self.__hariflar = [letter for word in text.split(" ") for letter in word]
-#
-#
-#     def __iter__(self):
-#         return self
-#
-#     def __next__(self):
-#         self.__elemnt += 1
-#         if self.__elemnt >= len(self.__hariflar):
-#             raise StopIteration("Element qolmadi !!!")
-#         return self.__hariflar[self.__elemnt]
-#
-# qator1 = QatorniIteratsiyaQilish(text)
-# qator_iter = qator1.__iter__()
-# print(qator_iter.__next__())
-# print(qator_iter.__next__())
-# print(qator_iter.__next__())
-
-# ---------------------------------------------------------------------
-
-# 5 misol
-
-# class FilterItarable:
-#     def __init__(self , max_son):
-#         self.__max_son = max_son
-#         self.__min_son = -1
-#         self.__juft_sonlar = [num for num in range(1 ,self.__max_son +1) if num % 2 == 0]
-#
-#     def __iter__(self):
-#         return self
-#
-#     def __next__(self):
-#         self.__min_son += 1
-#         if self.__min_son < len(self.__juft_sonlar):
-#             return self.__juft_sonlar[self.__min_son]
-#
-#         else:
-#             raise StopIteration("Element qolmadi !!!")
-#
-# son1 = FilterItarable(9)
-# son_items = son1.__iter__()
-# print(son_items.__next__())
-# print(son_items.__next__())
-# print(son_items.__next__())
-# print(son_items.__next__())
-
-# ---------------------------------------------------------------------
-
-# 6 misol
-
-# royhat = [1,2,3,4,5,6]
-#
-# iterator_royhat = iter(royhat)
-#
-# countor = 0
-#
-# while True:
-#     try:
-#         countor += next(iterator_royhat)
-#     except StopIteration:
-#         break
-#
-# print(countor)
-
-
-
-# ---------------------------------------------------------------------
-
-# 7 misol
-
-
-# royhat = ["1","2","3","4","5","6"]
-# iterator_royhat = iter(royhat)
-#
-# qidirlyotgan_elemnt = "22"
-# natija = "Yoq"
-#
-# for i in royhat:
-#     if next(iterator_royhat) == qidirlyotgan_elemnt:
-#         natija = "Bor"
-# print(natija)
-
-
-
-# ---------------------------------------------------------------------
-
-# Generatorlarga oid
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 1 misol
 
-
-# def renge_gen(max_son):
-#     countor = 0
-#     while max_son > countor:
-#         yield countor
-#         countor += 1
+# def daraja(son):
+#     return son**2
 #
-# son = renge_gen(20)
-# print(list(son))
+# numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# daraja = map(daraja , numbers)
+# print(list(daraja))
 
 
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 2 misol
 
-# def matin_uzunligini_topish(matin:str):
-#     royhat = matin.split(" ")
-#     harflar = 0
-#     for i in royhat:
-#         harflar = 0
-#         for j in i:
-#             harflar +=1
-#         yield f"{harflar}"
+# def filerlash(harf: str):
+#     return harf.isupper()
 #
-# text = matin_uzunligini_topish("Assalom alekum")
-# print(list(text))
+# royhat = ["A", "a", "B", "b", "C", "c", "D", "d"]
+# fil = filter(filerlash , royhat)
+# print(list(fil))
 
-# ---------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------------
 
 # 3 misol
 
-# def toq_son_gen(max_son):
-#     for i in range(max_son):
-#         if i %2==1:
-#             yield i
-# son = toq_son_gen(45)
-# print(list(son))
+# def telefon_numer_filter(number : str):
+#
+#     if number.startswith("+998"):
+#         return "UZ" , number
+#
+#     elif number.startswith("+7945"):
+#         return "RU" , number
+#
+#     elif number.startswith("+1438"):
+#         return "EN" , number
+#
+#     else:
+#         return "NOMALUM" , number
+#
+#
+#
+# phone_numbers = ["+998991234567", "+79454874459", "+14385001031"]
+# natija = map(telefon_numer_filter , phone_numbers)
+#
+# for dav , tel in list(natija):
+#     print(f"Davlat = {dav} Tilifon raqam = {tel}")
 
-# ---------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------------
 
 # 4 misol
 
-# max_son = 20
-# juft_son = (num for num in range(max_son) if num % 2 ==0)
-# print(list(juft_son))
+# def uporer_qilish(text : str):
+#     return text.title()
+#
+#
+# names = ['alfred', 'tabitha', 'william', 'arla']
+# natija = map(uporer_qilish , names)
+# print(list(natija))
 
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 5 misol
 
 
-# def chaksiz_gen():
-#     son = 0
-#     while True:
-#         son +=1
-#         yield son
+# def tekshirish(son : int):
+#     return son > 75
 #
-# son = chaksiz_gen()
-#
-# for i in range(20):
-#     print(next(son))
+# scores = [66, 90, 68, 59, 76, 60, 88, 74, 81, 65]
+# natija = filter(tekshirish , scores)
+# print(list(natija))
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 6 misol
 
-# num = {i : i ** 2 for i in range(1,10)}
-# print(num)
+# words = ['Anna', 'Alexey', 'Alla', 'Kazak', 'Dom']
+#
+# natija = filter(lambda text : text.lower()[::-1] == text.lower(), words)
+# print(list(natija))
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 7 misol
 
-
-# def yigindi(max):
-#     yigindi = 0
-#     for i in range(max+1):
-#         yigindi += i
+# def len_topish(text):
+#     return len(text)
 #
-#     yield yigindi
 #
-# son1 = yigindi(4)
-# print(next(son1))
+# royhat = ['apple', 'banana', 'cherry']
+# natija = map(len_topish , royhat)
+# print(list(natija))
 
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 8 misol
 
-
-# listda = [1,5,-9,8,7,-4,-12,4,9,-5]
+# def test_birlashtirish(text1 , text2):
+#     return text1+text2
 #
-# def musbat_filter(royhat):
-#     for i in royhat:
-#         if i > 0 :
-#             yield i
+# matin1 = ['apple', 'banana', 'cherry']
+# matin2 = ['orange', 'lemon', 'pineapple']
 #
-# son1 = musbat_filter(listda)
-# print(list(son1))
+# natija = map(test_birlashtirish , matin1 , matin2)
+# print(list(natija))
 
 
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 9 misol
 
-# import random
-#
-# def tasadifiy_gen():
-#     for i in range(4):
-#         yield random.randint(1 , 100)
-#
-# son1 = tasadifiy_gen()
-# print(list(son1))
 
+# royhat1 = ['Anna', 'Alexey', 'Alla', 'Kazak', 'Dom']
+# royhat2 = ["Sobir", "Bakir", "Jalil", "Toxir"]
+# new_royhat2 = royhat1 + royhat2
+#
+# print(new_royhat2)
 
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 10 misol
 
-# def tub_son(max_son):
-#     bolinuvchilar_soni = 0
-#     for i in range(1 , max_son+1):
-#         bolinuvchilar_soni = 0
-#         for j in range(1 , i+1):
-#             if i % j == 0:
-#                 bolinuvchilar_soni +=1
-#         if bolinuvchilar_soni == 2:
-#             yield i
-# son1 = tub_son(20)
-# print(list(son1))
 
+# royhat = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+# funksiya = lambda royhat , elemnt : [son for son in royhat if son == elemnt]
+#
+# natija = funksiya(royhat,21)
+#
+# print(len(natija))
 
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 11 misol
 
+# def funk(royhat: list):
+#     for i in royhat:
+        # royhat.count(i)
 
-# def teskari_matin(matin:str):
-#     yield matin[::-1]
-#
-# matin1 = teskari_matin("Assalom")
-# print(next(matin1))
+# royhat1 = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+# royhat2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+# umumiy = list(map(lambda x : x if x in royhat2 else None , royhat1))
+# natija = [x for x in umumiy if x is not None]
+# print(natija)
 
 
-
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
 
 # 12 misol
 
-
-
-# def kopaytma(max):
-#     kopaytma = 1
-#     for i in range(1 , max+1):
-#         kopaytma *= i
+# def toq_chiqarish(matin):
+#     for i in range(len(matin)):
+#         if i % 2 ==0:
+#             print(matin[i])
 #
-#     yield kopaytma
+# elemet= ['Python', 'C', 'C++', 'C#', 'Java', 'Basic', 'Kotlin', 'Pascal', 'JavaScript', 'Go', 'Dart', 'Assambler', 'Ruby', 'Rust', 'Mojo', 'Swift', 'Php']
+# toq_chiqarish(elemet)
+
+# ------------------------------------------------------------------------------------
+
+# 13 misol
+
+
+
+# programming_languages = ['Python', 'C', 'C++', 'C#', 'Java', 'Basic', 'Kotlin', 'Pascal', 'JavaScript', 'Go', 'Dart', 'Assambler', 'Ruby', 'Rust', 'Mojo', 'Swift', 'Php']
 #
-# son1 = kopaytma(4)
-# print(next(son1))
+# boshlash_nuqta = programming_languages.index("Basic")
+# natija = programming_languages[boshlash_nuqta:]
+# print(natija)
+
+
+# ------------------------------------------------------------------------------------
+
+# 14 misol
+
+# talabalar = [
+#     ['Ali', '1-A', 85.5],
+#     ['Laylo', '1-B', 91.0],
+#     ['Bekzod', '2-A', 76.0],
+#     ['Said', '2-B', 88.5],
+#     ['Olim', '3-A', 92.5]
+# ]
+#
+# yuqori_baxo = max(talabalar , key=lambda talaba : talaba[2])
+# print(f"Eng yuqori bahoga ega talaba: {yuqori_baxo[0]}, Guruh: {yuqori_baxo[1]}, Baho: {yuqori_baxo[2]}")
+
+
+
+# ------------------------------------------------------------------------------------
+
+# 15 misol
+
+
+# def kivadirat(son):
+#     return son**2
+#
+# listda = []
+# for i in range(21):
+#     listda.append(i)
+#
+# natija = map(kivadirat , listda)
+# print(list(natija))
 
 
 
 
 
+
+# ------------------------------------------------------------------------------------
+
+# 16 misol
+
+# def uzunlik(text):
+#     return len(text)
+# matin = ["Assalom alekum"]
+# natija = map(uzunlik , matin)
+# print(list(natija))
+
+
+# ------------------------------------------------------------------------------------
+
+# 17 misol
+
+# def salomlashish(ism):
+#     return f"Assalom alekum {ism}"
+#
+# ism_kiritish = input("Ismingizni kiritng : ")
+# ism = [ism_kiritish]
+# natija = map(salomlashish , ism)
+# print(list(natija)[0])
 
 
 
