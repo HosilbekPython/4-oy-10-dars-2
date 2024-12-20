@@ -1,239 +1,268 @@
 
-# Fn28 guruh To'htarov Hosilbek
-# 4 oy 8 dars
+# Fn28 4 oy 9 dars
 
-# ------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 
 # 1 misol
 
-# def daraja(son):
-#     return son**2
+# import time
+# from threading import Thread
 #
-# numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-# daraja = map(daraja , numbers)
-# print(list(daraja))
+# yigindi = None
+#
+#
+# def raqamlar_yigindisi(raqam:int):
+#     global yigindi
+#     uzunligi = len(str(raqam))
+#     raqamlar = []
+#     for i in range(uzunligi):
+#         oxirgi_raqam = raqam % 10
+#         raqamlar.append(oxirgi_raqam)
+#         raqam = int((raqam - oxirgi_raqam) / 10)
+#     yigindi = sum(raqamlar)
+#
+# son = 1548
+#
+# start = time.time()
+# th = Thread(target=raqamlar_yigindisi , args=(son,))
+# th.start()
+# th.join()
+#
+# end = time.time()
+# print(f"Ish bajarilguncha {round((end-start) , 2)} vaqt ketidi {son} ning raqamlar yig'indisi {yigindi}")
 
 
-# ------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------
 
 # 2 misol
 
-# def filerlash(harf: str):
-#     return harf.isupper()
+# from threading import Thread
 #
-# royhat = ["A", "a", "B", "b", "C", "c", "D", "d"]
-# fil = filter(filerlash , royhat)
-# print(list(fil))
+# natija = None
+#
+# def sekundan_kunlarga_otish(sekund):
+#     global natija
+#     minut = None
+#     soat = None
+#     kun = None
+#     if sekund > 60:
+#         minut = sekund // 60
+#         sekund_qoldiq = sekund % 60
+#         if minut > 60:
+#             soat = minut // 60
+#             minut_qoldiq = minut % 60
+#             if soat > 24:
+#                 kun = soat // 24
+#                 soat = soat % 24
+#                 natija = f"{kun} kun , {soat} soat , {minut_qoldiq} minut , {sekund_qoldiq} sekund  dan iborat"
+#             else:
+#                 natija = f"{soat} soat , {minut_qoldiq} minut , {sekund_qoldiq} sekund  dan iborat"
+#         else:
+#             natija = f"{minut} minut , {sekund_qoldiq} sekund  dan iborat"
+#     else:
+#         natija = f"{sekund} sekund"
+#
+#
+#
+# a = 60450546
+# th = Thread(target=sekundan_kunlarga_otish , args=(a,))
+# th.start()
+# th.join()
+#
+# print(f"Siz kirtgan {a} soniya {natija}")
 
 
-# ------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------
 
 # 3 misol
 
-# def telefon_numer_filter(number : str):
-#
-#     if number.startswith("+998"):
-#         return "UZ" , number
-#
-#     elif number.startswith("+7945"):
-#         return "RU" , number
-#
-#     elif number.startswith("+1438"):
-#         return "EN" , number
-#
-#     else:
-#         return "NOMALUM" , number
+# from threading import Thread
 #
 #
+# def title_qilish(text:str):
+#     global title_sozlar
+#     if text.isalpha():
+#         title_sozlar.append(text.title())
 #
-# phone_numbers = ["+998991234567", "+79454874459", "+14385001031"]
-# natija = map(telefon_numer_filter , phone_numbers)
+# title_sozlar = []
+# names = ['alfred', 'tabitha', 'william', 'arla']
+# thredinglar = []
 #
-# for dav , tel in list(natija):
-#     print(f"Davlat = {dav} Tilifon raqam = {tel}")
+# for i in names:
+#     the = Thread(target=title_qilish , args=(i,))
+#     thredinglar.append(the)
+#     the.start()
+#
+# for j in thredinglar:
+#     j.join()
+#
+# print(title_sozlar)
 
-
-# ------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 
 # 4 misol
 
-# def uporer_qilish(text : str):
-#     return text.title()
+# from threading import Thread
+#
+# def katalik_quiz(son:int):
+#     global katalar_raqamlar
+#     if son >= 75:
+#         katalar_raqamlar.append(son)
 #
 #
-# names = ['alfred', 'tabitha', 'william', 'arla']
-# natija = map(uporer_qilish , names)
-# print(list(natija))
+# scores = [66, 90, 68, 59, 76, 60, 88, 74, 81, 65]
+# katalar_raqamlar = []
+# thredinglar = []
+#
+# for i in scores:
+#     the = Thread(target=katalik_quiz , args=(i,))
+#     thredinglar.append(the)
+#     the.start()
+#
+# for j in thredinglar:
+#     j.join()
+#
+# print(katalar_raqamlar)
 
-# ------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 
 # 5 misol
 
-
-# def tekshirish(son : int):
-#     return son > 75
+# from threading import Thread
 #
-# scores = [66, 90, 68, 59, 76, 60, 88, 74, 81, 65]
-# natija = filter(tekshirish , scores)
-# print(list(natija))
+# def palindrom_quiz(text:str):
+#     global palidrom_list
+#     teskari_text = text[::-1].lower()
+#     if text.lower() == teskari_text:
+#         palidrom_list.append(text)
+#
+# words = ['Anna', 'Alexey', 'Alla', 'Kazak', 'Dom']
+# palidrom_list= []
+# thredinglar =[]
+#
+# for i in words:
+#     thr = Thread(target=palindrom_quiz , args=(i,))
+#     thredinglar.append(thr)
+#     thr.start()
+#
+# for i in thredinglar:
+#     i.join()
+#
+# print(palidrom_list)
 
-# ------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 
 # 6 misol
 
-# words = ['Anna', 'Alexey', 'Alla', 'Kazak', 'Dom']
+# from threading import Thread
 #
-# natija = filter(lambda text : text.lower()[::-1] == text.lower(), words)
-# print(list(natija))
+#
+# def matin_e_ni_ozgartirish(harf):
+#     global matin_list
+#
+#     if soz[i] == "e":
+#         matin_list.append("3")
+#     else:
+#         matin_list.append(soz[i])
+#
+# soz = "elanea"
+# harflar_soni = len(soz)
+# i = 0
+#
+# matin_list = []
+# threding =[]
+# while i < harflar_soni:
+#     the = Thread(target=matin_e_ni_ozgartirish , args=(soz[i], ))
+#     threding.append(the)
+#     the.start()
+#     i= i + 1
+#
+# for l in threding:
+#     l.join()
+#
+# text = "".join(matin_list)
+# print(text)
 
-# ------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 
 # 7 misol
 
-# def len_topish(text):
-#     return len(text)
+# from threading import Thread
+#
+# def matindaan_bosh_joy_olish(harf):
+#     global new_matin_list
+#     if harf != " ":
+#         new_matin_list.append(harf)
 #
 #
-# royhat = ['apple', 'banana', 'cherry']
-# natija = map(len_topish , royhat)
-# print(list(natija))
+# matin = "assalom alekum"
+#
+# new_matin_list = []
+# harflar_soni = len(matin)
+# treding = []
+# i = 0
+#
+# while i < harflar_soni:
+#     th = Thread(target=matindaan_bosh_joy_olish , args=(matin[i],))
+#     treding.append(th)
+#     th.start()
+#     i +=1
+#
+# for i in treding:
+#     i.join()
+#
+# natija = "".join(new_matin_list)
+# print(natija)
 
-# ------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 
 # 8 misol
 
-# def test_birlashtirish(text1 , text2):
-#     return text1+text2
+# from threading import Thread
 #
-# matin1 = ['apple', 'banana', 'cherry']
-# matin2 = ['orange', 'lemon', 'pineapple']
+# def kivadiratga(son:int):
+#     global kivadirat_royhat
+#     kivadirat_royhat.append(son**2)
 #
-# natija = map(test_birlashtirish , matin1 , matin2)
-# print(list(natija))
+# royhat = [1,2,3,4,5,10,9,8,7,6]
+# kivadirat_royhat = []
+# thredinlar = []
+#
+# for i in royhat:
+#     th = Thread(target=kivadiratga , args=(i,))
+#     thredinlar.append(th)
+#     th.start()
+#
+# for k in thredinlar:
+#     k.join()
+#
+# print(kivadirat_royhat)
 
-
-# ------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 
 # 9 misol
 
-
-# royhat1 = ['Anna', 'Alexey', 'Alla', 'Kazak', 'Dom']
-# royhat2 = ["Sobir", "Bakir", "Jalil", "Toxir"]
-# new_royhat2 = royhat1 + royhat2
+# from threading import Thread
+# import random
 #
-# print(new_royhat2)
-
-# ------------------------------------------------------------------------------------
-
-# 10 misol
-
-
-# royhat = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
-# funksiya = lambda royhat , elemnt : [son for son in royhat if son == elemnt]
+# def tasodifiy_son():
+#     global tasodifiy_sonlar_royhati
+#     son = random.randint(1,100)
+#     tasodifiy_sonlar_royhati.append(son)
 #
-# natija = funksiya(royhat,21)
+# tasodifiy_sonlar_royhati = []
+# tredinglar = []
 #
-# print(len(natija))
-
-# ------------------------------------------------------------------------------------
-
-# 11 misol
-
-# def funk(royhat: list):
-#     for i in royhat:
-        # royhat.count(i)
-
-# royhat1 = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
-# royhat2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-# umumiy = list(map(lambda x : x if x in royhat2 else None , royhat1))
-# natija = [x for x in umumiy if x is not None]
-# print(natija)
-
-
-# ------------------------------------------------------------------------------------
-
-# 12 misol
-
-# def toq_chiqarish(matin):
-#     for i in range(len(matin)):
-#         if i % 2 ==0:
-#             print(matin[i])
+# for i in range(10):
+#     th = Thread(target=tasodifiy_son)
+#     tredinglar.append(th)
+#     th.start()
 #
-# elemet= ['Python', 'C', 'C++', 'C#', 'Java', 'Basic', 'Kotlin', 'Pascal', 'JavaScript', 'Go', 'Dart', 'Assambler', 'Ruby', 'Rust', 'Mojo', 'Swift', 'Php']
-# toq_chiqarish(elemet)
-
-# ------------------------------------------------------------------------------------
-
-# 13 misol
-
-
-
-# programming_languages = ['Python', 'C', 'C++', 'C#', 'Java', 'Basic', 'Kotlin', 'Pascal', 'JavaScript', 'Go', 'Dart', 'Assambler', 'Ruby', 'Rust', 'Mojo', 'Swift', 'Php']
+# for j in tredinglar:
+#     j.join()
 #
-# boshlash_nuqta = programming_languages.index("Basic")
-# natija = programming_languages[boshlash_nuqta:]
-# print(natija)
-
-
-# ------------------------------------------------------------------------------------
-
-# 14 misol
-
-# talabalar = [
-#     ['Ali', '1-A', 85.5],
-#     ['Laylo', '1-B', 91.0],
-#     ['Bekzod', '2-A', 76.0],
-#     ['Said', '2-B', 88.5],
-#     ['Olim', '3-A', 92.5]
-# ]
-#
-# yuqori_baxo = max(talabalar , key=lambda talaba : talaba[2])
-# print(f"Eng yuqori bahoga ega talaba: {yuqori_baxo[0]}, Guruh: {yuqori_baxo[1]}, Baho: {yuqori_baxo[2]}")
-
-
-
-# ------------------------------------------------------------------------------------
-
-# 15 misol
-
-
-# def kivadirat(son):
-#     return son**2
-#
-# listda = []
-# for i in range(21):
-#     listda.append(i)
-#
-# natija = map(kivadirat , listda)
-# print(list(natija))
-
-
-
-
-
-
-# ------------------------------------------------------------------------------------
-
-# 16 misol
-
-# def uzunlik(text):
-#     return len(text)
-# matin = ["Assalom alekum"]
-# natija = map(uzunlik , matin)
-# print(list(natija))
-
-
-# ------------------------------------------------------------------------------------
-
-# 17 misol
-
-# def salomlashish(ism):
-#     return f"Assalom alekum {ism}"
-#
-# ism_kiritish = input("Ismingizni kiritng : ")
-# ism = [ism_kiritish]
-# natija = map(salomlashish , ism)
-# print(list(natija)[0])
-
+# print(tasodifiy_sonlar_royhati)
 
 
