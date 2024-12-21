@@ -1,268 +1,410 @@
+# FN28 uy ishi
 
-# Fn28 4 oy 9 dars
-
-# --------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 
 # 1 misol
 
-# import time
-# from threading import Thread
+# class FayildagiRaqamlarniQoshish:
+#     def __init__(self , filename , mode = "r" , encoding = "utf-8" ):
+#         self.filename = filename
+#         self.mode = mode
+#         self.encoding = encoding
+#         self.file = None
 #
-# yigindi = None
+#     def __enter__(self):
+#         self.file = open(self.filename , self.mode , encoding=self.encoding)
+#         return self.file
 #
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         self.file.close()
 #
-# def raqamlar_yigindisi(raqam:int):
-#     global yigindi
-#     uzunligi = len(str(raqam))
-#     raqamlar = []
-#     for i in range(uzunligi):
-#         oxirgi_raqam = raqam % 10
-#         raqamlar.append(oxirgi_raqam)
-#         raqam = int((raqam - oxirgi_raqam) / 10)
-#     yigindi = sum(raqamlar)
-#
-# son = 1548
-#
-# start = time.time()
-# th = Thread(target=raqamlar_yigindisi , args=(son,))
-# th.start()
-# th.join()
-#
-# end = time.time()
-# print(f"Ish bajarilguncha {round((end-start) , 2)} vaqt ketidi {son} ning raqamlar yig'indisi {yigindi}")
+# with FayildagiRaqamlarniQoshish("birinchi_misol_uchun.txt") as l:
+#     royhat = []
+#     a = l.read()
+#     b = a.split(" ")
+#     for i in b:
+#         royhat.append(int(i))
+#     print(sum(royhat))
 
 
 
-# --------------------------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------------------
+
+
+# Barcha misolar multiprocessing da ishlansin.
+
+from multiprocessing import Process , Queue
+import time
+import random
+
+# ---------------------------------------------------------------------------------------
+
+# 1 misol
+
+
+# def royhatdagi_raqamlar_yigindisi(royhat:list , q :Queue):
+#     yigindi = 0
+#     i = 0
+#     while i < len(royhat):
+#         yigindi += royhat[i]
+#         i +=1
+#     q.put(yigindi)
+#
+#
+# if __name__ == "__main__":
+#     q = Queue()
+#     royhatdagi_sonlar = [1,2,3,4,5,6]
+#     pro = Process(target=royhatdagi_raqamlar_yigindisi , args=(royhatdagi_sonlar , q))
+#     pro.start()
+#     pro.join()
+#     print(q.get())
+
+
+# ---------------------------------------------------------------------------------------
 
 # 2 misol
 
-# from threading import Thread
-#
-# natija = None
-#
-# def sekundan_kunlarga_otish(sekund):
-#     global natija
-#     minut = None
-#     soat = None
-#     kun = None
-#     if sekund > 60:
-#         minut = sekund // 60
-#         sekund_qoldiq = sekund % 60
-#         if minut > 60:
-#             soat = minut // 60
-#             minut_qoldiq = minut % 60
-#             if soat > 24:
-#                 kun = soat // 24
-#                 soat = soat % 24
-#                 natija = f"{kun} kun , {soat} soat , {minut_qoldiq} minut , {sekund_qoldiq} sekund  dan iborat"
-#             else:
-#                 natija = f"{soat} soat , {minut_qoldiq} minut , {sekund_qoldiq} sekund  dan iborat"
-#         else:
-#             natija = f"{minut} minut , {sekund_qoldiq} sekund  dan iborat"
-#     else:
-#         natija = f"{sekund} sekund"
+# def royhat_aralshtirish(royhat : list , q:Queue):
+#     random.shuffle(royhat)
+#     q.put(royhat)
 #
 #
-#
-# a = 60450546
-# th = Thread(target=sekundan_kunlarga_otish , args=(a,))
-# th.start()
-# th.join()
-#
-# print(f"Siz kirtgan {a} soniya {natija}")
+# if __name__ =="__main__":
+#     q = Queue()
+#     royhat_asil = [1, 2, 3, 4]
+#     pr = Process(target=royhat_aralshtirish , args=(royhat_asil , q))
+#     pr.start()
+#     pr.join()
+#     print(q.get())
 
-
-
-# --------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 
 # 3 misol
 
-# from threading import Thread
+# def max_and_min(royhat: list , max_son:Queue , min_son:Queue):
+#     max_son.put(max(royhat))
+#     min_son.put(min(royhat))
 #
+# if __name__ == "__main__":
+#     katta = Queue()
+#     kichik = Queue()
 #
-# def title_qilish(text:str):
-#     global title_sozlar
-#     if text.isalpha():
-#         title_sozlar.append(text.title())
-#
-# title_sozlar = []
-# names = ['alfred', 'tabitha', 'william', 'arla']
-# thredinglar = []
-#
-# for i in names:
-#     the = Thread(target=title_qilish , args=(i,))
-#     thredinglar.append(the)
-#     the.start()
-#
-# for j in thredinglar:
-#     j.join()
-#
-# print(title_sozlar)
+#     royhat = [4,5,9,8,72,3,98]
+#     yuborish = Process(target=max_and_min , args=(royhat , katta , kichik))
+#     yuborish.start()
+#     yuborish.join()
+#     print(katta.get())
+#     print(kichik.get())
 
-# --------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 
 # 4 misol
 
-# from threading import Thread
+# def borlikga_tekshirish(royhat:list , q:Queue):
+#     if royhat:
+#         q.put("Ro'yhatda malumotlar bor")
+#     else:
+#         q.put("Ro'yhat bosh")
 #
-# def katalik_quiz(son:int):
-#     global katalar_raqamlar
-#     if son >= 75:
-#         katalar_raqamlar.append(son)
+# if __name__ == "__main__":
+#     q = Queue()
+#     royhatimiz = [4]
+#     pr = Process(target=borlikga_tekshirish , args=(royhatimiz , q))
+#     pr.start()
+#     pr.join()
 #
-#
-# scores = [66, 90, 68, 59, 76, 60, 88, 74, 81, 65]
-# katalar_raqamlar = []
-# thredinglar = []
-#
-# for i in scores:
-#     the = Thread(target=katalik_quiz , args=(i,))
-#     thredinglar.append(the)
-#     the.start()
-#
-# for j in thredinglar:
-#     j.join()
-#
-# print(katalar_raqamlar)
+#     print(q.get())
 
-# --------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 
 # 5 misol
 
-# from threading import Thread
+# def takrorlanganlar_olib_tashlash(royhat:list , q :Queue):
+#     new_royhat = []
+#     for i in royhat:
+#         if i not in new_royhat:
+#             new_royhat.append(i)
+#     q.put(new_royhat)
 #
-# def palindrom_quiz(text:str):
-#     global palidrom_list
-#     teskari_text = text[::-1].lower()
-#     if text.lower() == teskari_text:
-#         palidrom_list.append(text)
-#
-# words = ['Anna', 'Alexey', 'Alla', 'Kazak', 'Dom']
-# palidrom_list= []
-# thredinglar =[]
-#
-# for i in words:
-#     thr = Thread(target=palindrom_quiz , args=(i,))
-#     thredinglar.append(thr)
-#     thr.start()
-#
-# for i in thredinglar:
-#     i.join()
-#
-# print(palidrom_list)
+# if __name__ == "__main__":
+#     q = Queue()
+#     royhat = [1,2,3,3,5,6,66,7,8,9,88,88,66,6,7]
+#     pr = Process(target=takrorlanganlar_olib_tashlash , args=(royhat , q))
+#     pr.start()
+#     pr.join()
+#     print(q.get())
 
-# --------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 
 # 6 misol
 
-# from threading import Thread
+# def royhat_matin_teskari(royhat:list[str] , q:Queue):
+#     teskari_royhat = []
+#     for i in royhat:
+#         if i.isalpha():
+#             teskari_royhat.append(i[::-1])
+#
+#     q.put(teskari_royhat)
 #
 #
-# def matin_e_ni_ozgartirish(harf):
-#     global matin_list
-#
-#     if soz[i] == "e":
-#         matin_list.append("3")
-#     else:
-#         matin_list.append(soz[i])
-#
-# soz = "elanea"
-# harflar_soni = len(soz)
-# i = 0
-#
-# matin_list = []
-# threding =[]
-# while i < harflar_soni:
-#     the = Thread(target=matin_e_ni_ozgartirish , args=(soz[i], ))
-#     threding.append(the)
-#     the.start()
-#     i= i + 1
-#
-# for l in threding:
-#     l.join()
-#
-# text = "".join(matin_list)
-# print(text)
+# if __name__ == "__main__":
+#     q = Queue()
+#     royhat = ["assalom" , "hello" , "privet"]
+#     pro = Process(target=royhat_matin_teskari , args=(royhat ,q))
+#     pro.start()
+#     pro.join()
+#     print(q.get())
 
-# --------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 
 # 7 misol
 
-# from threading import Thread
+# def eng_uzunini_topsih(royhat :list , q :Queue):
+#     eng_uzuni = royhat[0]
+#     for i in royhat:
+#         if len(i)>len(eng_uzuni):
+#             eng_uzuni = i
 #
-# def matindaan_bosh_joy_olish(harf):
-#     global new_matin_list
-#     if harf != " ":
-#         new_matin_list.append(harf)
+#     q.put(eng_uzuni)
 #
+# if __name__ =="__main__":
+#     q = Queue()
+#     matinlar = ["assalom" , 'alekum' , 'hello' , 'privet']
+#     pro = Process(target=eng_uzunini_topsih , args=(matinlar , q))
+#     pro.start()
+#     pro.join()
 #
-# matin = "assalom alekum"
-#
-# new_matin_list = []
-# harflar_soni = len(matin)
-# treding = []
-# i = 0
-#
-# while i < harflar_soni:
-#     th = Thread(target=matindaan_bosh_joy_olish , args=(matin[i],))
-#     treding.append(th)
-#     th.start()
-#     i +=1
-#
-# for i in treding:
-#     i.join()
-#
-# natija = "".join(new_matin_list)
-# print(natija)
+#     print(q.get())
 
-# --------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 
 # 8 misol
 
-# from threading import Thread
+# def takrprlanganlar_aliqlash(royhat : list , q:Queue):
+#     takrorlanganlar = []
+#     for i in royhat:
+#         counterda = royhat.count(i)
+#         if counterda > 1 and i not in takrorlanganlar:
+#             takrorlanganlar.append(i)
 #
-# def kivadiratga(son:int):
-#     global kivadirat_royhat
-#     kivadirat_royhat.append(son**2)
+#     q.put(takrorlanganlar)
 #
-# royhat = [1,2,3,4,5,10,9,8,7,6]
-# kivadirat_royhat = []
-# thredinlar = []
-#
-# for i in royhat:
-#     th = Thread(target=kivadiratga , args=(i,))
-#     thredinlar.append(th)
-#     th.start()
-#
-# for k in thredinlar:
-#     k.join()
-#
-# print(kivadirat_royhat)
+# if __name__ == "__main__":
+#     q = Queue()
+#     royhat = [1,2,3,3,5,6,66,7,8,9,88,88,66,6,7]
+#     pro = Process(target=takrprlanganlar_aliqlash , args=(royhat , q))
+#     pro.start()
+#     pro.join()
+#     print(q.get())
 
-# --------------------------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------------------
 
 # 9 misol
 
-# from threading import Thread
-# import random
+# def raqamlarni_ajratish(royhat:list[str|int] , q :Queue):
+#     raqamlar = []
+#     for i in royhat:
+#         if isinstance(i , int) or i.isdigit():
+#             raqamlar.append(int(i))
+#     q.put(raqamlar)
 #
-# def tasodifiy_son():
-#     global tasodifiy_sonlar_royhati
-#     son = random.randint(1,100)
-#     tasodifiy_sonlar_royhati.append(son)
+# if __name__ =="__main__":
+#     q = Queue()
+#     royhat = [1,2 , 'Assalom' , "456",3,3,5 ,"hhh",6,'66',7,8,9,88,88,66,6,7]
+#     pro = Process(target=raqamlarni_ajratish , args=(royhat , q))
+#     pro.start()
+#     pro.join()
+#     print(q.get())
+
+
+# ---------------------------------------------------------------------------------------
+
+# 10 misol
+
+# def raqamlarni_ajratish(royhat:list[str|int] , q :Queue):
+#     raqamlar = []
+#     for i in royhat:
+#         if isinstance(i , int) or i.isdigit():
+#             raqamlar.append(int(i)*2)
+#         else:
+#             raqamlar.append(i)
+#     q.put(raqamlar)
 #
-# tasodifiy_sonlar_royhati = []
-# tredinglar = []
+# if __name__ =="__main__":
+#     q = Queue()
+#     royhat = [1,2 , 'Assalom' , "456",3,3,5 ,"hhh",6,'66',7,8,9,88,88,66,6,7]
+#     pro = Process(target=raqamlarni_ajratish , args=(royhat , q))
+#     pro.start()
+#     pro.join()
+#     print(q.get())
+
+
+
+# ---------------------------------------------------------------------------------------
+
+# 11 misol
+
+# def diksheriydagi_katta_qiymat_topish(dikt :dict , q : Queue , q1:Queue):
+#     katta_key = next(iter(dikt))
+#     eng_katta_valu = dikt[katta_key]
 #
-# for i in range(10):
-#     th = Thread(target=tasodifiy_son)
-#     tredinglar.append(th)
-#     th.start()
+#     for key , value in dikt.items():
+#         if value > eng_katta_valu:
+#             katta_key = key
+#             eng_katta_valu = value
 #
-# for j in tredinglar:
-#     j.join()
+#     q.put(katta_key)
+#     q1.put(dikt[katta_key])
 #
-# print(tasodifiy_sonlar_royhati)
+# if __name__=="__main__":
+#     q = Queue()
+#     q1 = Queue()
+#     my_dict = {'a': 10, 'b': 200, 'c': 55}
+#     pr = Process(target=diksheriydagi_katta_qiymat_topish , args=(my_dict , q , q1))
+#     pr.start()
+#     pr.join()
+#     print(q.get())
+#     print(q1.get())
+
+
+
+# ---------------------------------------------------------------------------------------
+
+# 12 misol
+
+# def raqamlar_ortacha_qiymati(royhat:list , q:Queue):
+#     yigindisi = sum(royhat)
+#     soni = len(royhat)
+#     q.put(yigindisi/soni)
+#
+# if __name__ =="__main__":
+#     q = Queue()
+#     royhatda =[1,2,3,4,5,6,7,8,9]
+#     pr = Process(target=raqamlar_ortacha_qiymati , args=(royhatda , q))
+#     pr.start()
+#     pr.join()
+#
+#     print(q.get())
+
+
+
+# ---------------------------------------------------------------------------------------
+
+# 13 misol
+
+# def ikkta_royhat_birlashtirish(royhat1 :list , royhat2:list , q:Queue):
+#     if royhat1 and royhat2:
+#         royhat1.extend(royhat2)
+#         q.put(royhat1)
+#
+# if __name__=="__main__":
+#     q = Queue()
+#     ro1 = [1,2,3]
+#     ro2 = [4,5,6]
+#     pro = Process(target=ikkta_royhat_birlashtirish , args=(ro1 , ro2 , q))
+#     pro.start()
+#     pro.join()
+#     print(q.get())
+
+
+
+# ---------------------------------------------------------------------------------------
+
+# 14 misol
+
+
+# def eng_uzun_eng_kalta_key(my_dikt :dict , q1:Queue , q2 :Queue):
+#     katta_key = next(iter(my_dikt))
+#     for key , valu in my_dikt.items():
+#         if len(katta_key)<len(key):
+#             katta_key = key
+#     q1.put(katta_key)
+#     kichik_key = next(iter(my_dikt))
+#     for key, valu in my_dikt.items():
+#         if len(kichik_key) > len(key):
+#             kichik_key = key
+#     q2.put(kichik_key)
+#
+# if __name__=="__main__":
+#     q1 = Queue()
+#     q2 = Queue()
+#     my_dict = {'alfa': 10, 'bet': 200, 'gammmaa': 55}
+#     pro =Process(target=eng_uzun_eng_kalta_key , args=(my_dict , q1 , q2))
+#     pro.start()
+#     pro.join()
+#     print(f"Eng katta key = {q1.get()}")
+#     print(f"Eng kichik key = {q2.get()}")
+
+
+
+
+# ---------------------------------------------------------------------------------------
+
+# 15 misol
+
+# def royhatdagi_raqamlarni_int_qilish(royhat:list[str] , q =Queue):
+#     new_royhat = []
+#     for i in royhat:
+#         if i.isdigit():
+#             new_royhat.append(int(i))
+#         else:
+#             new_royhat.append(i)
+#     q.put(new_royhat)
+#
+# if __name__=="__main__":
+#     q = Queue()
+#     royhat = ["assalom" , "4" , "ss" ,"78" , "56"]
+#     pro = Process(target=royhatdagi_raqamlarni_int_qilish , args=(royhat, q))
+#     pro.start()
+#     pro.join()
+#
+#     print(q.get())
+
+
+# ---------------------------------------------------------------------------------------
+
+# 16 misol
+
+# def royhatdagi_qiymatlarini_2_ga_kopaytirish(royhat:list[int] , q:Queue):
+#     new_royhat = []
+#     for i in royhat:
+#         new_royhat.append(i*2)
+#     q.put(new_royhat)
+#
+# if __name__ =="__main__":
+#     q = Queue()
+#     royhat = [1,2,3,4,5,6]
+#     pr = Process(target=royhatdagi_qiymatlarini_2_ga_kopaytirish , args=(royhat , q))
+#     pr.start()
+#     pr.join()
+#     print(q.get())
+
+# ---------------------------------------------------------------------------------------
+
+# 17 misol
+
+
+# def stringi_teskari_qilish(royhat:list[str|int] , q:Queue):
+#     new_royhat = []
+#     for i in royhat:
+#         if isinstance(i , str) and i.isalpha():
+#             new_royhat.append(i[::-1])
+#         else:
+#             new_royhat.append(i)
+#     q.put(new_royhat)
+#
+# if __name__=="__main__":
+#     q = Queue()
+#     royhatda = ['assalom' , "hello" , 4 ,8 ,"alik"]
+#     pro = Process(target=stringi_teskari_qilish , args=(royhatda, q))
+#     pro.start()
+#     pro.join()
+#     print(q.get())
+
+
+
+
 
 
